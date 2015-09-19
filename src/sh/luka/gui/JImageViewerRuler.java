@@ -99,11 +99,11 @@ public class JImageViewerRuler extends JImageViewer implements Cloneable, Serial
 
         Double dx = rulerScale.getX2() - rulerScale.getX1();
         Double dy;
-        if(righttop == true) {
-            // type 1
+        if(righttop == false) {
+            // type 1 (lefttop)
             dy = rulerScale.getY1() - rulerScale.getY2();
         } else {
-            // type 2
+            // type 2 (righttop)
             dy = rulerScale.getY2() - rulerScale.getY1();
         }
 
@@ -124,14 +124,20 @@ public class JImageViewerRuler extends JImageViewer implements Cloneable, Serial
         Double py2 = (dy / 100.0) * D;
 
 
-        if(righttop == true) {
-            // type 1
-            result = new Line2D.Double(	rulerScale.getX1() + px1, rulerScale.getY1() - py1,
-        			rulerScale.getX1() + px2, rulerScale.getY1() - py2);
+        if(righttop == false) {
+            // type 1 (lefttop)
+            result = new Line2D.Double(
+                    rulerScale.getX1() + px1,
+                    rulerScale.getY1() - py1,
+                    rulerScale.getX1() + px2,
+                    rulerScale.getY1() - py2);
         } else {
-            // type 2
-            result = new Line2D.Double(rulerScale.getX1() + px1, rulerScale.getY1() + py1,
-                                rulerScale.getX1() + px2, rulerScale.getY1() + py2);
+            // type 2 (righttop)
+            result = new Line2D.Double(
+                    rulerScale.getX1() + px1,
+                    rulerScale.getY2() - py2,
+                    rulerScale.getX1() + px2,
+                    rulerScale.getY2() - py1);
         }
         return result;
     }
